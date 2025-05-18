@@ -1,12 +1,10 @@
-import { Button } from '@chakra-ui/react'
+import { TodoFrom } from "./includes/TodoFrom"
 
 function App() {
 
   return (
     <>
-      <Button
-        title='hello button'
-      />
+    <TodoFrom/>
     </>
   )
 }
