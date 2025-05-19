@@ -30,6 +30,7 @@ export const TodoFrom = () => {
       <Button color='black' onClick={valueSubmit}>Add todo</Button>
       <TodoList
         todos={todos}
+      setTodos={setTodos}
       />
     </Field.Root>
       </>
