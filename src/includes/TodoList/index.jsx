@@ -1,11 +1,24 @@
+import { List } from '@chakra-ui/react'
 import React from 'react'
+import { MdDelete } from "react-icons/md";
 
-export const TodoList = () => {
+
+export const TodoList = ({todos}) => {
   return (
     <div>
-        <ul>
-            <li>hello</li>
-        </ul>
+       <List.Root>
+        {
+          todos.map(item =>(
+            <>
+            <List.Item display='flex' padding='20px' as='oi'>
+              {item.value}
+              <MdDelete/>
+            </List.Item>
+
+            </>
+          ))
+        }
+       </List.Root>
     </div>
   )
 }

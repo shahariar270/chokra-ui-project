@@ -1,15 +1,20 @@
 import React, { useState } from 'react'
 import { Button, Field, Input } from "@chakra-ui/react"
+import { TodoList } from '../TodoList'
 
 export const TodoFrom = () => {
  const [todo, setTodo] = useState('')
  const [todos, setTodos]= useState([])
 
- console.log(todos);
+//  console.log(todos);
     const valueSubmit=(e)=>{
             e.preventDefault();
-          setTodos([ ...todos,
-        { id: Date.now(), value: todo }])
+
+            if(todo.trim() !== ''){
+              setTodos([ ...todos,
+            { id: Date.now(), value: todo }]) 
+            }
+
           setTodo('')
             
     }
@@ -17,8 +22,15 @@ export const TodoFrom = () => {
       <>
     <Field.Root invalid  className='container'>
       <Field.Label>Todo Value</Field.Label>
-      <Input placeholder="Enter You Todo Value" onChange={(e)=> setTodo(e.target.value)} />
-      <Button color='black' onClick={valueSubmit}  >Add todo</Button>
+      <Input 
+        placeholder="Enter You Todo Value" 
+        value={todo}
+        onChange={(e)=> setTodo(e.target.value)}
+      />
+      <Button color='black' onClick={valueSubmit}>Add todo</Button>
+      <TodoList
+        todos={todos}
+      />
     </Field.Root>
       </>
 
