@@ -1,4 +1,5 @@
 import { TodoFrom } from "./includes/TodoFrom"
+import './App.css'
 
 function App() {
 
