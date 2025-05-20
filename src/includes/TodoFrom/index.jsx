@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Center, Container, Field, Input } from "@chakra-ui/react"
+import { Button, Center, Container, Field, Flex, Input } from "@chakra-ui/react"
 import { TodoList } from '../TodoList'
 
 export const TodoFrom = () => {
@@ -21,7 +21,7 @@ export const TodoFrom = () => {
   return (
       <>
       <Container display='flex'>
-        <Center>
+        <Flex>
           <Field.Root>
             <Input
               value={todo}
@@ -34,7 +34,7 @@ export const TodoFrom = () => {
               bg='teal'
            >Add Value</Button>
           </Field.Root>
-        </Center>
+        </Flex>
       </Container>
       <TodoList
         todos={todos}
