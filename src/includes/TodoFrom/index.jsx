@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Field, Input } from "@chakra-ui/react"
+import { Button, Center, Container, Field, Input } from "@chakra-ui/react"
 import { TodoList } from '../TodoList'
 
 export const TodoFrom = () => {
@@ -20,19 +20,26 @@ export const TodoFrom = () => {
     }
   return (
       <>
-    <Field.Root invalid  className='container'>
-      <Field.Label>Todo Value</Field.Label>
-      <Input 
-        placeholder="Enter You Todo Value" 
-        value={todo}
-        onChange={(e)=> setTodo(e.target.value)}
-      />
-      <Button color='black' onClick={valueSubmit}>Add todo</Button>
+      <Container display='flex'>
+        <Center>
+          <Field.Root>
+            <Input
+              value={todo}
+              onChange={(e)=> setTodo(e.target.value)}
+              border='black'   
+           />
+           <Button
+              onClick={valueSubmit}
+              color='black'
+              bg='teal'
+           >Add Value</Button>
+          </Field.Root>
+        </Center>
+      </Container>
       <TodoList
         todos={todos}
-      setTodos={setTodos}
+        setTodos={setTodos} 
       />
-    </Field.Root>
       </>
 
   )
