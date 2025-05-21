@@ -41,14 +41,7 @@ export const TodoFrom = () => {
            >Add Value</Button>
           </Field.Root>
         </Flex>
-
 </Box>
-     
-
-      {/* <Container display='flex'>
-        <Flex>
-         
-      </Container> */}
       <TodoList
         todos={todos}
         setTodos={setTodos} 

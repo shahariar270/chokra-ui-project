@@ -1,9 +1,11 @@
-import { Button, List } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Checkbox, List } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { MdDelete } from "react-icons/md";
 
 
 export const TodoList = ({todos,setTodos}) => {
+  const {isCheckbox, setIsCheckbox} =useState(false)
+
 const removeTodo = (id) =>{
       setTodos(todos.filter(item => item.id !== id));
 
@@ -14,15 +16,24 @@ const removeTodo = (id) =>{
        <List.Root>
         {
           todos.map(item =>(
-            <>
-            <List.Item display='flex' padding='20px'>
+            <div>
+              <Box bg='tomato' w='100%' p={1} color='white' margin={2}>
+            <List.Item key={item.id} display='flex' width='100%' justifyContent='space-between'>
               {item.value}
-              <Button onClick={()=> removeTodo(item.id) } colorPalette="teal" color='black' variant="solid">
-        <MdDelete /> Remove
+              <Button 
+                onClick={()=> removeTodo(item.id) }  
+                color='black'
+                colorScheme='gray'
+                border='none'
+                outline='none'
+              >
+        <MdDelete />
       </Button>
             </List.Item>
+            </Box>
 
-            </>
+            </div>
+             
           ))
         }
        </List.Root>
