@@ -1,16 +1,12 @@
 import { Box, Button, Checkbox, List } from '@chakra-ui/react'
-import React, { useState } from 'react'
 import { MdDelete } from "react-icons/md";
 
 
 export const TodoList = ({todos,setTodos}) => {
-  const {isCheckbox, setIsCheckbox} =useState(false)
-
 const removeTodo = (id) =>{
       setTodos(todos.filter(item => item.id !== id));
 
 }
-
   return (
     <div>
        <List.Root>
@@ -32,11 +28,11 @@ const removeTodo = (id) =>{
             </List.Item>
             </Box>
 
-            </div>
-             
+            </div>  
           ))
         }
        </List.Root>
     </div>
+    
   )
 }
