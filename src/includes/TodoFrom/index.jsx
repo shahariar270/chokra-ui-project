@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 import { Box, Button, Center, Container, Field, Flex, Input } from "@chakra-ui/react"
 import { TodoList } from '../TodoList'
+import { useDispatch, useSelector } from 'react-redux'
+import { addTodo } from '../../reduer/TodoSlice/TodoSlice'
 
 export const TodoFrom = () => {
- const [todo, setTodo] = useState('')
- const [todos, setTodos]= useState([])
+ const [todo, setTodo] = useState('');
+  const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todo.todo);
+  // console.log(todos);
 
-//  console.log(todos);
-    const valueSubmit=(e)=>{
-            e.preventDefault();
-
-            if(todo.trim() !== ''){
-              setTodos([ ...todos,
-            { id: Date.now(), value: todo }]) 
-            }
-
-          setTodo('')
-            
+  const valueSubmit = (e) => {
+    e.preventDefault();
+    if (todo.trim() !== '') {
+      dispatch(addTodo(todo));
+      setTodo('');
     }
+  };
   return (
       <>
 <Box>
@@ -43,9 +42,10 @@ export const TodoFrom = () => {
         </Flex>
 </Box>
       <TodoList
-        todos={todos}
-        setTodos={setTodos} 
+        // todos={todos}
+        // setTodos={setTodos} 
       />
       </>
   )
-} 
+}
+
