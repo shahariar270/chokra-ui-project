@@ -14,9 +14,16 @@ export const removeTodo = (itemId) => {
         payload: itemId
     }
 }
+export const editMode = (itemId) => {
+    return {
+        type: 'EDIT_MODE',
+        payload: itemId
+    }
+}
 
 const initialState = {
     todo: [],
+    isEdit:null 
 }
 
 export const todoReducer = (state = initialState, action) => {
@@ -30,6 +37,11 @@ export const todoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 todo: state.todo.filter(item=> item.id !== action.payload)
+            }
+        case 'EDIT_MODE':
+            return {
+                ...state,
+                isEdit:action.payload  
             }
         default:
             return state

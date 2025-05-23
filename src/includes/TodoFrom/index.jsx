@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addTodo } from '../../reduer/TodoSlice/TodoSlice'
 
 export const TodoFrom = () => {
- const [todo, setTodo] = useState('');
+  const [todo, setTodo] = useState('');
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todo.todo);
-  // console.log(todos);
+  const isEdit = useSelector((state) => state.todo.isEdit);
+
 
   const valueSubmit = (e) => {
     e.preventDefault();
@@ -42,10 +43,10 @@ export const TodoFrom = () => {
         </Flex>
 </Box>
       <TodoList
-        // todos={todos}
-        // setTodos={setTodos} 
+      // todos={todos}
+      // setTodos={setTodos} 
       />
-      </>
+    </>
   )
 }
 
