@@ -8,6 +8,12 @@ export const addTodo = (value) => {
         }
     }
 }
+export const removeTodo = (itemId) => {
+    return {
+        type: 'REMOVE_TODO',
+        payload: itemId
+    }
+}
 
 const initialState = {
     todo: [],
@@ -19,6 +25,11 @@ export const todoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 todo: [...state.todo, action.payload]
+            }
+        case 'REMOVE_TODO':
+            return {
+                ...state,
+                todo: state.todo.filter(item=> item.id !== action.payload)
             }
         default:
             return state

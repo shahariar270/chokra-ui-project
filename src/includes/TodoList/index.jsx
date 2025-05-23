@@ -1,18 +1,20 @@
 import { Box, Button, Checkbox, List } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { MdDelete } from "react-icons/md";
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
+import { removeTodo } from '../../reduer/TodoSlice/TodoSlice';
 
 
 export const TodoList = () => {
   const {isCheckbox, setIsCheckbox} =useState(false)
+  const dispatch= useDispatch()
 
   const todos = useSelector((state)=> state.todo.todo)
 
-const removeTodo = (id) =>{
-      setTodos(todos.filter(item => item.id !== id));
-
+const removeHandle = (id) =>{
+     dispatch(removeTodo(id));
 }
+console.log(todos);
 
   return (
     <div>
@@ -24,7 +26,7 @@ const removeTodo = (id) =>{
             <List.Item key={item.value} display='flex' width='100%' justifyContent='space-between'>
               {item.value}
               <Button 
-                onClick={()=> removeTodo(item.id) }  
+                onClick={()=> removeHandle(item.id) }  
                 color='black'
                 colorScheme='gray'
                 border='none'
