@@ -20,7 +20,6 @@ export const TodoList = () => {
 const removeHandle = (id) =>{
      dispatch(removeTodo(id));
 }
-console.log(todos);
 
   return (
     <div>
