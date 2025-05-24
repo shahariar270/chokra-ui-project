@@ -20,6 +20,12 @@ export const editMode = (itemId) => {
         payload: itemId
     }
 }
+export const updateTodo = (id , value) => {
+    return {
+        type: 'UPDATE_TODO',
+        payload:{id ,value} 
+    }
+}
 
 const initialState = {
     todo: [],
@@ -42,6 +48,14 @@ export const todoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isEdit:action.payload  
+            }
+        case 'UPDATE_TODO':
+            return {
+                ...state,
+                todo: state.todo.map((item)=>{
+                    item.id == action.payload.id ? 
+                        {...item, value:action.payload.value}: item 
+                })
             }
         default:
             return state
