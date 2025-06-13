@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, List } from '@chakra-ui/react'
+import { Box, Button, Checkbox, List, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,8 @@ export const TodoList = ({ editHandle }) => {
 
   const dispatch = useDispatch()
 
-  const todos = useSelector((state) => state.todo.todo.todo);
+  const todos = useSelector((state) => state.todo.todo);
+  console.log(todos);
   const isEdit = useSelector((state) => state.todo.isEdit)
 
   // const editHandle =(id)=>{
@@ -42,7 +43,25 @@ export const TodoList = ({ editHandle }) => {
                 alignItems='center'
                 padding='4px'
               >
-                {item.value}
+                <Box
+                  display='flex'
+                  alignItems='center'
+                >
+                  <Button
+                    color='black'
+                    colorScheme='gray'
+                    border='none'
+                    outline='none'
+                    bg='transparent'
+                    padding='0'
+                    cursor='all-scroll'
+                  >
+
+                  </Button>
+                  <Text>
+                    {item.value}
+                  </Text>
+                </Box>
                 <Button
                   onClick={() => removeHandle(item.id)}
                   color='black'
