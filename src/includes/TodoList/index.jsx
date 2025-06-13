@@ -28,7 +28,14 @@ export const TodoList = ({ editHandle }) => {
           todos.map(item => (
             <div>
               <Box bg='tomato' w='100%' p={1} color='white' margin={2}>
-                <List.Item key={item.id} display='flex' width='100%' justifyContent='space-between'>
+                <List.Item
+                  key={item.id}
+                  display='flex'
+                  width='100%'
+                  justifyContent='space-between'
+                  alignItems='center'
+                  padding='4px'
+                >
                   {item.value}
                   <Button
                     onClick={() => removeHandle(item.id)}
@@ -36,6 +43,8 @@ export const TodoList = ({ editHandle }) => {
                     colorScheme='gray'
                     border='none'
                     outline='none'
+                    bg='transparent'
+                    padding='0'
                   >
                     <MdDelete />
                   </Button>
