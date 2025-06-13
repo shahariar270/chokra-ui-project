@@ -10,7 +10,7 @@ export const TodoList = ({ editHandle }) => {
 
   const dispatch = useDispatch()
 
-  const todos = useSelector((state) => state.todo.todo)
+  const todos = useSelector((state) => state.todo.todo.todo);
   const isEdit = useSelector((state) => state.todo.isEdit)
 
   // const editHandle =(id)=>{
@@ -26,29 +26,35 @@ export const TodoList = ({ editHandle }) => {
       <List.Root>
         {
           todos.map(item => (
-            <div>
-              <Box bg='tomato' w='100%' p={1} color='white' margin={2}>
-                <List.Item
-                  key={item.id}
-                  display='flex'
-                  width='100%'
-                  justifyContent='space-between'
-                  alignItems='center'
-                  padding='4px'
+            <Box
+              bg='tomato'
+              w='100%'
+              p={1}
+              color='white'
+              margin={2}
+              key={item.id}
+            >
+              <List.Item
+                key={item.id}
+                display='flex'
+                width='100%'
+                justifyContent='space-between'
+                alignItems='center'
+                padding='4px'
+              >
+                {item.value}
+                <Button
+                  onClick={() => removeHandle(item.id)}
+                  color='black'
+                  colorScheme='gray'
+                  border='none'
+                  outline='none'
+                  bg='transparent'
+                  padding='0'
                 >
-                  {item.value}
-                  <Button
-                    onClick={() => removeHandle(item.id)}
-                    color='black'
-                    colorScheme='gray'
-                    border='none'
-                    outline='none'
-                    bg='transparent'
-                    padding='0'
-                  >
-                    <MdDelete />
-                  </Button>
-                  {/* <Button 
+                  <MdDelete />
+                </Button>
+                {/* <Button 
                 onClick={()=> editHandle(item.id) }  
                 color='white'
                 colorScheme='blue'
@@ -56,11 +62,8 @@ export const TodoList = ({ editHandle }) => {
               >
         <MdDelete />
       </Button> */}
-                </List.Item>
-              </Box>
-
-            </div>
-
+              </List.Item>
+            </Box>
           ))
         }
       </List.Root>

@@ -20,41 +20,49 @@ export const editMode = (itemId) => {
         payload: itemId
     }
 }
-export const updateTodo = (id , value) => {
+export const updateTodo = (id, value) => {
     return {
         type: 'UPDATE_TODO',
-        payload:{id ,value} 
+        payload: { id, value }
     }
 }
 
+const todoStore = JSON.parse(localStorage.getItem('todoData')) || [];
+
+
 const initialState = {
-    todo: [],
-    isEdit:null 
+    todo: todoStore,
+    isEdit: null
 }
 
 export const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            return {
+            const addTodo = {
                 ...state,
-                todo: [...state.todo, action.payload]
+                todo: [...state, action.payload]
             }
+            localStorage.setItem('todoData', JSON.stringify(addTodo));
+            return addTodo;
+
         case 'REMOVE_TODO':
-            return {
+            const removeTodo = {
                 ...state,
-                todo: state.todo.filter(item=> item.id !== action.payload)
+                todo: state.todo.filter(item => item.id !== action.payload)
             }
+            localStorage.setItem('todoData', JSON.stringify(removeTodo));
+            return removeTodo;
         case 'EDIT_MODE':
             return {
                 ...state,
-                isEdit:action.payload  
+                isEdit: action.payload
             }
         case 'UPDATE_TODO':
             return {
                 ...state,
-                todo: state.todo.map((item)=>{
-                    item.id == action.payload.id ? 
-                        {...item, value:action.payload.value}: item 
+                todo: state.todo.map((item) => {
+                    item.id == action.payload.id ?
+                        { ...item, value: action.payload.value } : item
                 })
             }
         default:
