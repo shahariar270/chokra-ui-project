@@ -38,11 +38,16 @@ export const TodoFrom = () => {
             <Input
               value={isEdit ? editTodo : todo}
               onChange={(e) => isEdit ? setEditTodo(e.target.value) : setTodo(e.target.value)}
-              border='black'
+              border='1px solid black'
               width='350px'
               placeholder='Add Todo Value'
               borderColor='black'
               _placeholder={{ opacity: 1, color: 'gray.500' }}
+              _focus={{
+                outline: 'none',
+                border: 'none',
+              }}
+
             />
             <Button
               onClick={(e) => valueSubmit(e)}
@@ -50,6 +55,10 @@ export const TodoFrom = () => {
               bg='teal'
               size='md'
               outline='none'
+              _focus={{
+                outline: 'none',
+                border: 'none',
+              }}
             >Add Value</Button>
           </Field.Root>
         </Flex>
