@@ -31,8 +31,8 @@ const todoStore = JSON.parse(localStorage.getItem('todoData')) || [];
 
 
 const initialState = {
-    todo: Array.isArray(todoStore) ? todoStore : [],
-    isEdit: null
+    todo: Array.isArray(todoStore) ? todoStore : Object.values(todoStore).flat(),
+    // isEdit: null
 }
 
 export const todoReducer = (state = initialState, action) => {
