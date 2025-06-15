@@ -24,6 +24,7 @@ export const TodoList = ({ editHandle }) => {
 
   return (
     <div>
+      
       <List.Root>
         {
           todos.map(item => (
@@ -70,6 +71,10 @@ export const TodoList = ({ editHandle }) => {
                   outline='none'
                   bg='transparent'
                   padding='0'
+                  _focus={{
+                    outline: 'none',
+                    border: 'none',
+                  }}
                 >
                   <MdDelete />
                 </Button>
