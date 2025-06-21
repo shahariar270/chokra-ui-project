@@ -1,97 +1,74 @@
-import { Box, Button, Checkbox, List, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
+import { Box, Button, Text } from '@chakra-ui/react'
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { editMode, removeTodo } from '../../reduer/TodoSlice/TodoSlice';
+import { removeTodo } from '../../reduer/TodoSlice/TodoSlice';
 
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { SortableItem } from './SortableItem'; 
+import { useState } from 'react';
 
-export const TodoList = ({ editHandle }) => {
-  // const {isEdit, setIsEdit} =useState(false)
+export const TodoList = () => {
+  const dispatch = useDispatch();
+  const todosFromStore = useSelector((state) => state.todo.todo);
+  const [todos, setTodos] = useState(todosFromStore);
 
-  const dispatch = useDispatch()
-
-  const todos = useSelector((state) => state.todo.todo);
-  console.log(todos);
-  const isEdit = useSelector((state) => state.todo.isEdit)
-
-  // const editHandle =(id)=>{
-  //   dispatch(editMode(!isEdit))
-  // }
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   const removeHandle = (id) => {
     dispatch(removeTodo(id));
+    setTodos(prev => prev.filter(todo => todo.id !== id));
   }
 
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const oldIndex = todos.findIndex(todo => todo.id === active.id);
+      const newIndex = todos.findIndex(todo => todo.id === over.id);
+
+      const newArray = arrayMove(todos, oldIndex, newIndex);
+      setTodos(newArray);
+    }
+  };
+
   return (
-    <div>
-      
-      <List.Root>
-        {
-          todos.map(item => (
-            <Box
-              bg='tomato'
-              w='100%'
-              p={1}
-              color='white'
-              margin={2}
-              key={item.id}
-            >
-              <List.Item
-                key={item.id}
-                display='flex'
-                width='100%'
-                justifyContent='space-between'
-                alignItems='center'
-                padding='4px'
-              >
-                <Box
-                  display='flex'
-                  alignItems='center'
-                >
-                  <Button
-                    color='black'
-                    colorScheme='gray'
-                    border='none'
-                    outline='none'
-                    bg='transparent'
-                    padding='0'
-                    cursor='all-scroll'
-                  >
-
-                  </Button>
-                  <Text>
-                    {item.value}
-                  </Text>
-                </Box>
-                <Button
-                  onClick={() => removeHandle(item.id)}
-                  color='black'
-                  colorScheme='gray'
-                  border='none'
-                  outline='none'
-                  bg='transparent'
-                  padding='0'
-                  _focus={{
-                    outline: 'none',
-                    border: 'none',
-                  }}
-                >
-                  <MdDelete />
-                </Button>
-                {/* <Button 
-                onClick={()=> editHandle(item.id) }  
-                color='white'
-                colorScheme='blue'
-               bg='blue'
-              >
-        <MdDelete />
-      </Button> */}
-              </List.Item>
-            </Box>
-          ))
-        }
-      </List.Root>
-
-    </div>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext
+        items={todos}
+        strategy={verticalListSortingStrategy}
+      >
+        {todos.map(item => (
+          <SortableItem
+            key={item.id}
+            id={item.id}
+            value={item.value}
+            onRemove={() => removeHandle(item.id)}
+          />
+        ))}
+      </SortableContext>
+    </DndContext>
   )
 }
