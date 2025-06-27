@@ -2,16 +2,19 @@ import React from 'react'
 import { useEffect } from 'react'
 import './styles.css'
 import { Button, Card, Text } from '@chakra-ui/react';
-import { minifyText } from '../../Utils/Helper';
+import { blogData, minifyText } from '../../Utils/Helper';
+import { Link } from 'react-router';
 
 
 export const DynamicRoute = () => {
   const [data, setData] = React.useState([]);
 
   useEffect(() => {
-    fetch('https://dummyjson.com/posts')
-      .then(res => res.json())
-      .then(data => setData(data.posts));
+    blogData().then((res) => {
+      setData(res);
+    }).catch((err) => {
+      console.error("Error fetching blog data:", err);
+    });
   }, []);
 
   return (
@@ -25,14 +28,18 @@ export const DynamicRoute = () => {
                 <Card.Title>{item.title}</Card.Title>
                 <Card.Description>{minifyText(item.body, 80)}</Card.Description>
               </Card.Header>
-              <Button
-                color='white'
-                background='black'
-                width='120px'
-                marginTop='10px'
-                alignSelf='start'
-                _hover={{ background: 'gray.700' }}
-              >Learn more</Button>
+              <Link to={item.title}>
+                <Button
+                  color='white'
+                  background='black'
+                  width='120px'
+                  marginTop='10px'
+                  alignSelf='start'
+                  _hover={{ background: 'gray.700' }}
+                >
+                  Learn more
+                </Button>
+              </Link>
             </Card.Root>
           </div>
         ))
