@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import './styles.css'
 import { Button, Card, Text } from '@chakra-ui/react';
+import { minifyText } from '../../Utils/Helper';
 
 
 export const DynamicRoute = () => {
@@ -11,7 +12,7 @@ export const DynamicRoute = () => {
     fetch('https://dummyjson.com/posts')
       .then(res => res.json())
       .then(data => setData(data.posts));
-  }, [])
+  }, []);
 
   return (
     <div className="dynamic-route">
@@ -22,11 +23,14 @@ export const DynamicRoute = () => {
             <Card.Root>
               <Card.Header>
                 <Card.Title>{item.title}</Card.Title>
-                <Card.Description>{item.body}</Card.Description>
+                <Card.Description>{minifyText(item.body, 80)}</Card.Description>
               </Card.Header>
               <Button
                 color='white'
                 background='black'
+                width='120px'
+                marginTop='10px'
+                alignSelf='start'
                 _hover={{ background: 'gray.700' }}
               >Learn more</Button>
             </Card.Root>
