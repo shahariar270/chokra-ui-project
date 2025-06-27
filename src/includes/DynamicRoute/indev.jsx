@@ -1,17 +1,20 @@
 import React from 'react'
 import { useEffect } from 'react'
 import './styles.css'
-import { Button, Card, Text } from '@chakra-ui/react';
+import { Button, Card, Loader, Text } from '@chakra-ui/react';
 import { blogData, minifyText } from '../../Utils/Helper';
 import { Link } from 'react-router';
+import { Loading } from '../Loadding';
 
 
 export const DynamicRoute = () => {
   const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     blogData().then((res) => {
       setData(res);
+      setLoading(false);
     }).catch((err) => {
       console.error("Error fetching blog data:", err);
     });
@@ -19,8 +22,11 @@ export const DynamicRoute = () => {
 
   return (
     <div className="dynamic-route">
-
-      {
+      {loading ? (
+        <div>
+          <Loading />
+        </div>
+      ) : (
         data.map((item) => (
           <div key={item.id} className="card">
             <Card.Root>
@@ -43,7 +49,7 @@ export const DynamicRoute = () => {
             </Card.Root>
           </div>
         ))
-      }
+      )}
     </div>
   )
 }
