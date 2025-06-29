@@ -47,7 +47,7 @@ export const TodoList = () => {
 
       const newArray = arrayMove(todos, oldIndex, newIndex);
       setTodos(newArray);
-    }
+    } 
   };
 
   return (
