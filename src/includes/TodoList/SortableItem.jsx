@@ -1,5 +1,5 @@
 // ./SortableItem.jsx
-import React from 'react'
+import React, { useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Box, Button, Text } from '@chakra-ui/react';
@@ -18,7 +18,13 @@ export const SortableItem = ({ id, value, onRemove }) => {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+  const [editTodo, setEditTodo] = useState(null)
+  const [editMode, setEditMode] = useState(false)
+  // const editHandle = (todoId) => {
+  //   const editAbleItem = 
 
+
+  // }
   return (
     <Box
       ref={setNodeRef}
@@ -52,6 +58,15 @@ export const SortableItem = ({ id, value, onRemove }) => {
         <Button
           onClick={onRemove}
           color='black'
+          bg='transparent'
+          border='none'
+          p={0}
+        >
+          <MdDelete />
+        </Button>
+        <Button
+          onClick={()=> editHandle(id)}
+          color='green'
           bg='transparent'
           border='none'
           p={0}
