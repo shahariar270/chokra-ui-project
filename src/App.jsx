@@ -9,9 +9,9 @@ import { Note } from './includes/Note';
 function App() {
   return (
     <>
-      <Box bg="gray.800" px={6} py={3}>
+      <Box px={6} py={3}>
         <Flex h={12} alignItems="center" justifyContent="space-between">
-          <Text color="white" fontWeight="bold">My App</Text>
+          <Text color="grey.500" fontWeight="bold">My App</Text>
           <HStack spacing={6}>
             <Button as={RouterLink} to="/" colorScheme="teal" variant="ghost">
               Todo

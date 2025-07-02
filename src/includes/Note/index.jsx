@@ -5,7 +5,7 @@ export const Note = () => {
   const [note, setNote] = useState('')
   const [notes, setNotes] = useState([])
 
-  console.log(note, notes);
+  // console.log(note, notes);
 
   const submitNote = () => {
     const newNote = {
