@@ -1,5 +1,6 @@
 import { Button, CardBody, CardDescription, CardFooter, CardRoot, CardTitle, Image, Text } from '@chakra-ui/react'
 import React from 'react'
+import { minifyText } from '../../Utils/Helper';
 
 export const ProfileCard = (props) => {
     const { imageSrc, cardTitle, cardDes, cardPrice } = props;
@@ -13,7 +14,7 @@ export const ProfileCard = (props) => {
                 <CardBody gap="2">
                     <CardTitle>{cardTitle}</CardTitle>
                     <CardDescription>
-                        {cardDes}
+                        {minifyText(cardDes)}
                     </CardDescription>
                     <Text textStyle="2xl" fontWeight="medium" letterSpacing="tight" mt="2">
                         {cardPrice}
