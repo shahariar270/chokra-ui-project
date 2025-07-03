@@ -12,6 +12,7 @@ function App() {
       <Route path="/dynamic" element={<DynamicRoute />} />
       <Route path="/dynamic/:title" element={<Details />} />
       <Route path="/note" element={<Note/>} />
+      <Route path="/" element={<Note/>} />
     </Routes>
   );
 }
