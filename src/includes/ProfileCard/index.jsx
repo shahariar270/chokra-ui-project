@@ -15,7 +15,14 @@ export const ProfileCard = (props) => {
 
     return (
         <>
-            <CardRoot maxW="sm" overflow="hidden">
+            <CardRoot
+                overflow="hidden"
+                maxW="sm"
+                borderRadius="xl"
+                boxShadow="md"
+                _hover={{ boxShadow: 'lg', }}
+                transition="all 0.2s ease-in-out"
+            >
                 <Image
                     src={imageSrc ?? ''}
                     alt={`image of ${cardTitle ?? ''}`}
