@@ -17,8 +17,8 @@ export const ProfileCard = (props) => {
         <>
             <CardRoot maxW="sm" overflow="hidden">
                 <Image
-                    src={imageSrc}
-                    alt="Green double couch with wooden legs"
+                    src={imageSrc ?? ''}
+                    alt={`image of ${cardTitle ?? ''}`}
                 />
                 <CardBody gap="2">
                     <CardTitle>{cardTitle ?? ''}</CardTitle>
