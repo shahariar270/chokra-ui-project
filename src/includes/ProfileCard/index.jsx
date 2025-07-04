@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export const ProfileCard = (props) => {
     const { imageSrc, cardTitle, cardDes, cardPrice } = props;
 
-    ProfileCard.PropTypes = {
+    ProfileCard.propTypes = {
         imageSrc: PropTypes.string,
         cardTitle: PropTypes.string,
         cardDes: PropTypes.string,
