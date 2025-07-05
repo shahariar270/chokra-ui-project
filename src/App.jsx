@@ -6,6 +6,7 @@ import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
 import { Note } from './includes/Note';
 import { CallCard } from './includes/ProfileCard/CallCard';
+import { Emoji } from './includes/Imoji';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dynamic/:title" element={<Details />} />
         <Route path="/note" element={<Note />} />
         <Route path="/profile_card" element={<CallCard />} />
+        <Route path="/emoji" element={<Emoji />} />
       </Routes>
 
       <Box px={6} py={3}>
@@ -29,6 +31,9 @@ function App() {
               Dynamic
             </Button>
             <Button as={RouterLink} to="/note" colorScheme="teal" variant="ghost">
+              Note
+            </Button>
+            <Button as={RouterLink} to="/emoji" colorScheme="teal" variant="ghost">
               Note
             </Button>
           </HStack>
