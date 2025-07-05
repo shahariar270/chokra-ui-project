@@ -17,6 +17,9 @@ export const Note = () => {
     setNote('')
 
   }
+  const deleteHandler = (newId) => {
+    setNotes((prevNotes) => prevNotes.filter(item => item.id !== newId))
+  }
 
 
   return (
@@ -41,7 +44,7 @@ export const Note = () => {
           notes.map((item, key) => (
             <ListItem key={key}>
               {item.data}
-
+              <Button onClick={(e) => deleteHandler(item.id)} >delete</Button>
             </ListItem>
           ))
         }
