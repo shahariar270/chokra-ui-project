@@ -34,7 +34,7 @@ function App() {
               Note
             </Button>
             <Button as={RouterLink} to="/emoji" colorScheme="teal" variant="ghost">
-              Note
+              Emoji
             </Button>
           </HStack>
         </Flex>
