@@ -1,56 +1,75 @@
-import { Button, Field, FieldLabel, FieldRoot, Flex, Input, List, ListItem, ListRoot } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import {
+  Button,
+  FieldLabel,
+  FieldRoot,
+  Flex,
+  Input,
+  ListItem,
+  ListRoot
+} from '@chakra-ui/react';
+import React, { useState } from 'react';
 
 export const Note = () => {
-  const [note, setNote] = useState('')
-  const [notes, setNotes] = useState([])
-
-  // console.log(note, notes);
+  const [note, setNote] = useState('');
+  const [notes, setNotes] = useState([]);
+  const [editId, setEditId] = useState(null);
 
   const submitNote = () => {
+    if (!note) return;
+
     const newNote = {
       id: Date.now(),
-      data: note,
-      isEdit: false
+      data: note
     };
-    setNotes([...notes, newNote])
-    setNote('')
 
-  }
-  const deleteHandler = (newId) => {
-    setNotes((prevNotes) => prevNotes.filter(item => item.id !== newId))
-  }
+    setNotes([...notes, newNote]);
+    setNote('');
+  };
 
+  const deleteHandler = (id) => {
+    setNotes(notes.filter((item) => item.id !== id));
+  };
+
+  const editHandle = (item) => {
+    setNote(item.data);
+    setEditId(item.id);
+  };
+
+  const updateHandle = () => {
+    setNotes(
+      notes.map((item) =>
+        item.id === editId ? { ...item, data: note } : item
+      )
+    );
+    setEditId(null);
+    setNote('');
+  };
 
   return (
     <>
       <Flex>
         <FieldRoot>
-          <FieldLabel>
-            Enter Todo
-          </FieldLabel>
+          <FieldLabel>Enter Todo</FieldLabel>
           <Input
-            placeholder='enter your note'
+            placeholder='Enter your note'
+            value={note}
             onChange={(e) => setNote(e.target.value)}
           />
-          <Button
-            onClick={submitNote}
-          >Submit Value</Button>
+          <Button onClick={editId ? updateHandle : submitNote}>
+            {editId ? 'Update' : 'Add'}
+          </Button>
         </FieldRoot>
       </Flex>
 
       <ListRoot>
-        {
-          notes.map((item, key) => (
-            <ListItem key={key}>
-              {item.data}
-              <Button onClick={(e) => deleteHandler(item.id)} >delete</Button>
-            </ListItem>
-          ))
-        }
-        <ListItem></ListItem>
+        {notes.map((item) => (
+          <ListItem key={item.id}>
+            {item.data}
+            <Button onClick={() => deleteHandler(item.id)}>Delete</Button>
+            <Button onClick={() => editHandle(item)}>Edit</Button>
+          </ListItem>
+        ))}
       </ListRoot>
-
     </>
-  )
-}
+  );
+};
