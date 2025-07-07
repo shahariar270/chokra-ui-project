@@ -6,6 +6,7 @@ import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
 import { Note } from './includes/Note';
 import { CallCard } from './includes/ProfileCard/CallCard';
+import { DndKit } from './includes/dndKIt/Index';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dynamic/:title" element={<Details />} />
         <Route path="/note" element={<Note />} />
         <Route path="/profile_card" element={<CallCard />} />
+        <Route path="/dnd_kit" element={<DndKit />} />
       </Routes>
 
       <Box px={6} py={3}>
