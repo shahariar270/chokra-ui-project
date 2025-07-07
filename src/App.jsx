@@ -27,6 +27,9 @@ function App() {
             <Button as={RouterLink} to="/profile_card" colorScheme="teal" variant="ghost">
               Card
             </Button>
+            <Button as={RouterLink} to="/dnd_kit" colorScheme="teal" variant="ghost">
+              DND kit
+            </Button>
           </HStack>
         </Flex>
       </Box>
@@ -37,7 +40,7 @@ function App() {
         <Route path="/dynamic/:title" element={<Details />} />
         <Route path="/note" element={<Note />} />
         <Route path="/profile_card" element={<CallCard />} />
-        <Route path="/profile_card" element={<CallCard />} />
+        <Route path="/dnd_kit" element={<DndKit />} />
       </Routes>
     </>
 
