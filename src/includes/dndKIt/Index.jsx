@@ -1,79 +1,53 @@
-import { List, ListItem, ListRoot, Table } from '@chakra-ui/react'
-import { DndContext, useDroppable } from '@dnd-kit/core'
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {
+    DndContext,
+    useDraggable,
+    useDroppable,
+} from '@dnd-kit/core';
 
-export const DndKit = (
+export default function DndKit() {
+    const [dropped, setDropped] = useState(null);
 
-
-) => {
-    const [droppedItem, setDroppedItem] = useState(null);
-
-
-    const data = [
-        {
-            id: 1,
-            value: 'wakeup at 6 am'
-        },
-        {
-            id: 2,
-            value: 'cutting grass'
-        },
-        {
-            id: 3,
-            value: 'out cow form '
-        },
-        {
-            id: 4,
-            value: 'hellp'
-        },
-    ]
     const handleDragEnd = (event) => {
         const { active, over } = event;
 
-        if (over && over.id === 'droppable') {
-            setDroppedItem(active.id);
-            console.log(`${active.id} dropped into ${over.id}`);
+        if (over && over.id === 'drop-zone') {
+            setDropped(active.id);
         }
     };
+
     return (
-        <>
-            <DndContext onDragEnd={handleDragEnd}>
-                <Drag data={data} />
-                <Droppable id="droppable">
-                    {droppedItem ? <p>Dropped: {droppedItem}</p> : <p>Drop here</p>}
+        <DndContext onDragEnd={handleDragEnd}>
+            <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: 40 }}>
+                <Draggable id="cow-task" />
+                <Droppable id="drop-zone">
+                    {dropped ? <strong>Dropped: {dropped}</strong> : 'Drop here'}
                 </Droppable>
-            </DndContext>
-        </>
-
-
-    )
-
+            </div>
+        </DndContext>
+    );
 }
 
+function Draggable({ id }) {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({ id });
 
-export const Drag = ({ data }) => {
+    const style = {
+        transform: transform
+            ? `translate(${transform.x}px, ${transform.y}px)`
+            : undefined,
+        padding: '10px 20px',
+        backgroundColor: '#90cdf4',
+        border: '2px solid #3182ce',
+        borderRadius: '8px',
+        cursor: 'grab',
+        userSelect: 'none',
+    };
 
     return (
-        <>
-            {data.map((item) => (
-                <div
-                    key={item.id}
-                    id={item.id}
-                    draggable="true"
-                    style={{
-                        padding: '10px 20px',
-                        margin: '10px',
-                        border: '1px solid #ccc',
-                        background: 'white',
-                        borderRadius: '4px',
-                        cursor: 'grab',
-                    }}
-                >
-                    <li>{item.value}</li>
-                </div>
-            ))}
-        </>
-    )
+        <div ref={setNodeRef} {...listeners} {...attributes} style={style}>
+            {id}
+        </div>
+    );
 }
 
 function Droppable({ id, children }) {
@@ -82,12 +56,13 @@ function Droppable({ id, children }) {
     const style = {
         width: 200,
         height: 150,
-        backgroundColor: isOver ? '#c8f7c5' : '#f0f0f0',
-        border: '2px dashed #ccc',
+        backgroundColor: isOver ? '#f6ffe0' : '#edf2f7',
+        border: '2px dashed #a0aec0',
+        borderRadius: '8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: '8px'
+        fontWeight: 'bold',
     };
 
     return (

@@ -6,7 +6,7 @@ import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
 import { Note } from './includes/Note';
 import { CallCard } from './includes/ProfileCard/CallCard';
-import { DndKit } from './includes/dndKIt/Index';
+import  DndKit  from './includes/dndKIt/Index';
 
 function App() {
   return (
