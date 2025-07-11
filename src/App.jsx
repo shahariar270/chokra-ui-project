@@ -6,6 +6,7 @@ import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
 import { Note } from './includes/Note';
 import { CallCard } from './includes/ProfileCard/CallCard';
+import { Emoji } from './includes/Imoji';
 
 function App() {
   return (
