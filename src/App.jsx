@@ -7,7 +7,9 @@ import { Details } from './includes/DynamicRoute/Details';
 import { Note } from './includes/Note';
 import { CallCard } from './includes/ProfileCard/CallCard';
 import { DndKit } from './includes/dndKIt/Index';
-// import  DndKit  from './includes/dndKIt/Index';
+import { Emoji } from './includes/Imoji';
+import Pagination from './includes/Pagination/Pagination';
+
 
 function App() {
   return (
@@ -30,11 +32,12 @@ function App() {
             </Button>
             <Button as={RouterLink} to="/dnd_kit" colorScheme="teal" variant="ghost">
               DND kit
+            <Button as={RouterLink} to="/pagination" colorScheme="teal" variant="ghost">
+              Pagination
             </Button>
           </HStack>
         </Flex>
       </Box>
-
       <Routes>
         <Route path="/" element={<TodoFrom />} />
         <Route path="/dynamic" element={<DynamicRoute />} />
@@ -42,6 +45,9 @@ function App() {
         <Route path="/note" element={<Note />} />
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/dnd_kit" element={<DndKit />} />
+        <Route path="/emoji" element={<Emoji />} />
+        <Route path="/pagination" element={<Pagination />} />
+        <Route path="/profile_card" element={<CallCard />} />
       </Routes>
     </>
 
