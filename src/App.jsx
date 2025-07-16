@@ -25,8 +25,8 @@ function App() {
             <Button as={RouterLink} to="/note" colorScheme="teal" variant="ghost">
               Note
             </Button>
-            <Button as={RouterLink} to="/emoji" colorScheme="teal" variant="ghost">
-              Emoji
+            <Button as={RouterLink} to="/profile_card" colorScheme="teal" variant="ghost">
+              Card
             </Button>
             <Button as={RouterLink} to="/pagination" colorScheme="teal" variant="ghost">
               Pagination
@@ -34,7 +34,6 @@ function App() {
           </HStack>
         </Flex>
       </Box>
-
       <Routes>
         <Route path="/" element={<TodoFrom />} />
         <Route path="/dynamic" element={<DynamicRoute />} />
@@ -43,9 +42,8 @@ function App() {
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/emoji" element={<Emoji />} />
         <Route path="/pagination" element={<Pagination />} />
+        <Route path="/profile_card" element={<CallCard />} />
       </Routes>
-
-
     </>
 
   );
