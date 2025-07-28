@@ -32,6 +32,7 @@ function App() {
             </Button>
             <Button as={RouterLink} to="/dnd_kit" colorScheme="teal" variant="ghost">
               DND kit
+              </Button>
             <Button as={RouterLink} to="/pagination" colorScheme="teal" variant="ghost">
               Pagination
             </Button>
