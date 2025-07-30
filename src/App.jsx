@@ -9,6 +9,7 @@ import { CallCard } from './includes/ProfileCard/CallCard';
 import { DndKit } from './includes/dndKIt/Index';
 import { Emoji } from './includes/Imoji';
 import Pagination from './includes/Pagination/Pagination';
+import { FormikControl } from './includes/FormikControl';
 
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
             <Button as={RouterLink} to="/pagination" colorScheme="teal" variant="ghost">
               Pagination
             </Button>
+            <Button as={RouterLink} to="/formik" colorScheme="teal" variant="ghost">
+              Formik
+            </Button>
           </HStack>
         </Flex>
       </Box>
@@ -49,6 +53,7 @@ function App() {
         <Route path="/emoji" element={<Emoji />} />
         <Route path="/pagination" element={<Pagination />} />
         <Route path="/profile_card" element={<CallCard />} />
+        <Route path="/formik" element={<FormikControl />} />
       </Routes>
     </>
 
