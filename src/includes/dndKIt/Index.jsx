@@ -10,16 +10,20 @@ import {
     arrayMove,
     SortableContext,
     useSortable,
-    verticalListSortingStrategy, // use vertical for now
+    verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 export const DndKit = () => {
-    const [tasks, setTasks] = useState([
-        { id: "1", title: "hello i am shahariar" },
-        { id: "2", title: "hello i am sadiya" },
-        { id: "3", title: "hello i am samiya" },
-    ]);
+    const [tasks, setTasks] = useState(() => {
+        const saved = localStorage.getItem("tasks");
+        if (saved) return JSON.parse(saved);
+        return [
+            { id: "1", title: "hello i am shahariar" },
+            { id: "2", title: "hello i am sadiya" },
+            { id: "3", title: "hello i am samiya" },
+        ];
+    });
 
     const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
 
@@ -30,14 +34,17 @@ export const DndKit = () => {
         const oldIndex = getTaskPos(active.id);
         const newIndex = getTaskPos(over.id);
 
-        setTasks((prev) => arrayMove(prev, oldIndex, newIndex));
+        setTasks((prev) => {
+            const newTasks = arrayMove(prev, oldIndex, newIndex);
+            localStorage.setItem("tasks", JSON.stringify(newTasks));
+            return newTasks;
+        });
     };
 
-    // Required sensors
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                distance: 5, // how far pointer must move before dragging starts
+                distance: 5,
             },
         })
     );
@@ -52,7 +59,7 @@ export const DndKit = () => {
                 items={tasks.map((task) => task.id)}
                 strategy={verticalListSortingStrategy}
             >
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <div style={{ display: "flex", width:'250px', flexDirection: "column", gap: "10px" }}>
                     {tasks.map((task) => (
                         <SortableItem key={task.id} id={task.id} title={task.title} />
                     ))}
@@ -62,7 +69,6 @@ export const DndKit = () => {
     );
 };
 
-// SortableItem component
 const SortableItem = ({ id, title }) => {
     const {
         attributes,
