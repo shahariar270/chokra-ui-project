@@ -1,98 +1,70 @@
+import { closestCenter, DndContext } from "@dnd-kit/core";
+import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import React, { useState } from "react";
-import {
-    DndContext,
-    closestCorners,
-    PointerSensor,
-    useSensor,
-    useSensors,
-} from "@dnd-kit/core";
-import {
-    arrayMove,
-    SortableContext,
-    useSortable,
-    verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 export const DndKit = () => {
-    const [tasks, setTasks] = useState(() => {
-        const saved = localStorage.getItem("tasks");
-        if (saved) return JSON.parse(saved);
-        return [
-            { id: "1", title: "hello i am shahariar" },
-            { id: "2", title: "hello i am sadiya" },
-            { id: "3", title: "hello i am samiya" },
-        ];
-    });
+    const [tasks, setTasks] = useState([
+        {
+            id: 1,
+            value: "Shahariar"
+        },
+        {
+            id: 2,
+            value: "Shahariar1"
+        },
+        {
+            id: 3,
+            value: "Shahariar2"
+        },
+    ])
 
-    const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
-
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (!over || active.id === over.id) return;
-
-        const oldIndex = getTaskPos(active.id);
-        const newIndex = getTaskPos(over.id);
-
-        setTasks((prev) => {
-            const newTasks = arrayMove(prev, oldIndex, newIndex);
-            localStorage.setItem("tasks", JSON.stringify(newTasks));
-            return newTasks;
-        });
-    };
-
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 5,
-            },
-        })
-    );
 
     return (
-        <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragEnd={handleDragEnd}
-        >
-            <SortableContext
-                items={tasks.map((task) => task.id)}
-                strategy={verticalListSortingStrategy}
+        <>
+            <DndContext
+                collisionDetection={closestCenter}
+                onDragEnd={(event) => {
+                    const { active, over } = event;
+
+                    setTasks((task) => {
+                        const newIndex = task.indexOf(over.id);
+                        const oldindex = task.indexOf(active.id);
+                        return arrayMove(task, oldindex, newIndex)
+                    })
+                }}
             >
-                <div style={{ display: "flex", width:'250px', flexDirection: "column", gap: "10px" }}>
+                <SortableContext
+                    items={tasks}
+                    strategy={verticalListSortingStrategy}
+                >
                     {tasks.map((task) => (
-                        <SortableItem key={task.id} id={task.id} title={task.title} />
+                        <SortableItem
+                            key={task.id}
+                            id={task}
+                        />
+
                     ))}
-                </div>
-            </SortableContext>
-        </DndContext>
-    );
+                </SortableContext>
+            </DndContext>
+        </>
+
+
+    )
 };
 
-const SortableItem = ({ id, title }) => {
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-        isDragging,
-    } = useSortable({ id });
+const SortableItem = ({ id }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
-        padding: "10px",
-        border: "1px solid #ccc",
-        borderRadius: "6px",
-        background: isDragging ? "#e0f7fa" : "#f9f9f9",
-        cursor: "grab",
-        userSelect: "none",
-    };
-
+    }
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            {title}
+            {id.value}
+
         </div>
-    );
-};
+    )
+
+}
