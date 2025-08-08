@@ -54,15 +54,35 @@ export const DndKit = () => {
 };
 
 const SortableItem = ({ id }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
+        padding: "10px",
+        border: "1px solid #ccc",
+        borderRadius: "6px",
+        background: isDragging ? "#e0f7fa" : "#f9f9f9",
+        cursor: "grab",
+        userSelect: "none",
     }
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            {id.value}
+        <div ref={setNodeRef} style={style} >
+            <div className="">
+                <h1>
+                    {id.value}
+                </h1>
+                <button
+                    {...attributes}
+                    {...listeners}
+                    style={{
+                        cursor: "grab",
+                        background: "transparent",
+                        border: "none",
+                        fontSize: "18px"
+                    }}
+                >:::</button>
+            </div>
 
         </div>
     )
