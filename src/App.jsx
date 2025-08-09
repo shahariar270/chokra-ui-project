@@ -10,6 +10,7 @@ import { DndKit } from './includes/dndKIt/Index';
 import { Emoji } from './includes/Imoji';
 import Pagination from './includes/Pagination/Pagination';
 import { FormikControl } from './includes/FormikControl';
+import { Crud } from './dev/Crud';
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
             </Button>
             <Button as={RouterLink} to="/dynamic" colorScheme="teal" variant="ghost">
               Dynamic
+            </Button>
+            <Button as={RouterLink} to="/crud" colorScheme="teal" variant="ghost">
+              CRUD
             </Button>
             <Button as={RouterLink} to="/note" colorScheme="teal" variant="ghost">
               Note
@@ -46,6 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<TodoFrom />} />
         <Route path="/dynamic" element={<DynamicRoute />} />
+        <Route path="/crud" element={<Crud />} />
         <Route path="/dynamic/:title" element={<Details />} />
         <Route path="/note" element={<Note />} />
         <Route path="/profile_card" element={<CallCard />} />
