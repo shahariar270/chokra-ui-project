@@ -1,77 +1,60 @@
+import { closestCenter, DndContext } from "@dnd-kit/core";
+import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import React, { useState } from "react";
-import {
-    DndContext,
-    closestCorners,
-    PointerSensor,
-    useSensor,
-    useSensors,
-} from "@dnd-kit/core";
-import {
-    arrayMove,
-    SortableContext,
-    useSortable,
-    verticalListSortingStrategy, // use vertical for now
-} from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 export const DndKit = () => {
     const [tasks, setTasks] = useState([
-        { id: "1", title: "hello i am shahariar" },
-        { id: "2", title: "hello i am sadiya" },
-        { id: "3", title: "hello i am samiya" },
-    ]);
+        {
+            id: 1,
+            value: "Shahariar"
+        },
+        {
+            id: 2,
+            value: "Shahariar1"
+        },
+        {
+            id: 3,
+            value: "Shahariar2"
+        },
+    ])
 
-    const getTaskPos = (id) => tasks.findIndex((task) => task.id === id);
-
-    const handleDragEnd = (event) => {
-        const { active, over } = event;
-        if (!over || active.id === over.id) return;
-
-        const oldIndex = getTaskPos(active.id);
-        const newIndex = getTaskPos(over.id);
-
-        setTasks((prev) => arrayMove(prev, oldIndex, newIndex));
-    };
-
-    // Required sensors
-    const sensors = useSensors(
-        useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 5, // how far pointer must move before dragging starts
-            },
-        })
-    );
 
     return (
-        <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragEnd={handleDragEnd}
-        >
-            <SortableContext
-                items={tasks.map((task) => task.id)}
-                strategy={verticalListSortingStrategy}
+        <>
+            <DndContext
+                collisionDetection={closestCenter}
+                onDragEnd={(event) => {
+                    const { active, over } = event;
+
+                    setTasks((task) => {
+                        const newIndex = task.indexOf(over.id);
+                        const oldindex = task.indexOf(active.id);
+                        return arrayMove(task, oldindex, newIndex)
+                    })
+                }}
             >
-                <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <SortableContext
+                    items={tasks}
+                    strategy={verticalListSortingStrategy}
+                >
                     {tasks.map((task) => (
-                        <SortableItem key={task.id} id={task.id} title={task.title} />
+                        <SortableItem
+                            key={task.id}
+                            id={task}
+                        />
+
                     ))}
-                </div>
-            </SortableContext>
-        </DndContext>
-    );
+                </SortableContext>
+            </DndContext>
+        </>
+
+
+    )
 };
 
-// SortableItem component
-const SortableItem = ({ id, title }) => {
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-        isDragging,
-    } = useSortable({ id });
+const SortableItem = ({ id }) => {
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -82,11 +65,26 @@ const SortableItem = ({ id, title }) => {
         background: isDragging ? "#e0f7fa" : "#f9f9f9",
         cursor: "grab",
         userSelect: "none",
-    };
-
+    }
     return (
-        <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-            {title}
+        <div ref={setNodeRef} style={style} >
+            <div className="">
+                <h1>
+                    {id.value}
+                </h1>
+                <button
+                    {...attributes}
+                    {...listeners}
+                    style={{
+                        cursor: "grab",
+                        background: "transparent",
+                        border: "none",
+                        fontSize: "18px"
+                    }}
+                >:::</button>
+            </div>
+
         </div>
-    );
-};
+    )
+
+}
