@@ -1,0 +1,30 @@
+.list-item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    width: 500px;
+}
+
+.list-item span {
+    flex-grow: 1;
+}
+
+.list-button {
+    margin: 0 4px;
+    padding: 4px 8px;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+}
+
+.delete-button {
+    background-color: #f44336;
+}
