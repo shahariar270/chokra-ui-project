@@ -6,25 +6,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const Crud = () => {
     const [text, setText] = useState('');
-    const [items, setItems] = useState([]);
     const [editIndex, setEditIndex] = useState(null)
     const [editMode, setEditMode] = useState(false)
     const crud = useSelector((state) => state.crud.crud);
 
-    console.log(crud);
     const disPatch = useDispatch();
 
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         if (editIndex !== null) {
             disPatch(editData(editIndex, text))
-
+            setEditIndex(null);
+            setEditMode(false)
         } else {
             disPatch(addData(RandomId(), text));
         }
-
         setText('')
     }
 
@@ -33,9 +30,13 @@ export const Crud = () => {
     }
 
     const handelEdit = (id) => {
+        const item = crud.find(item => item.id === editIndex);
+
+        if (item) {
+            setText(item.value)
+        }
         setEditIndex(id);
         setEditMode(true);
-
     }
 
     return (
