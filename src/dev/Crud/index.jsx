@@ -15,6 +15,11 @@ export const Crud = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        if(text === ''){
+            alert('plz enter todo   ')
+            return;
+        }
+
         if (editIndex !== null) {
             disPatch(editData(editIndex, text))
             setEditIndex(null);
@@ -30,11 +35,10 @@ export const Crud = () => {
     }
 
     const handelEdit = (id) => {
-        const item = crud.find(item => item.id === editIndex);
+        const item = crud.find(item => item.id === id);
+        if (!item) return;
 
-        if (item) {
-            setText(item.value)
-        }
+        setText(item.value)
         setEditIndex(id);
         setEditMode(true);
     }
