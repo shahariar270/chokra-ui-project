@@ -8,9 +8,15 @@ export const addData = (id, value) => {
             value
         }
     }
-
-
 }
+
+export const deleteData = (id) => {
+    return {
+        type: 'remove_data',
+        payload: id
+    }
+}
+
 
 const initialState = {
     crud: []
@@ -23,14 +29,13 @@ export const CrudReducer = (state = initialState, action) => {
                 ...state,
                 crud: [...state.crud, action.payload]
             };
+        case 'remove_data':
+            return {
+                ...state,
+                crud: state.crud.filter(item => item.id !== action.payload)
+            };
         default:
             return state;
     }
 }
-
-
-
-// function crudReducer(state = initialState, action) {
-    
-// }
 

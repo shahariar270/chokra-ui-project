@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './styles.css'
 import { RandomId } from '../../Utils/Helper';
-import { addData } from '../../reduer/Crud';
+import { addData, deleteData } from '../../reduer/Crud';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Crud = () => {
@@ -21,9 +21,8 @@ export const Crud = () => {
     }
 
     const deleteHandle = (id) => {
-        const vaule = items.filter((item, index) => index !== id)
-        setItems(vaule)
-    }
+       disPatch(deleteData(id))
+    }   
 
     const handelEdit = (id) => {
         setEditIndex(id)
@@ -56,13 +55,13 @@ export const Crud = () => {
                             <span>{item.value}</span>
                             <button
                                 className="list-button edit-button"
-                                onClick={(e) => handelEdit(index)}
+                                onClick={(e) => handelEdit(item.id)}
                             >
                                 edit
                             </button>
                             <button
                                 className="list-button delete-button"
-                                onClick={(e) => deleteHandle(index)}
+                                onClick={(e) => deleteHandle(item.id)}
                             >
                                 delete
                             </button>
