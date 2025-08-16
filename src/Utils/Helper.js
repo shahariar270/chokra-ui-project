@@ -8,5 +8,14 @@ export const minifyText = (text, maxLength = 100) => {
 export const blogData = async () => {
     const res = await fetch('https://dummyjson.com/posts');
     const data = await res.json();
-    return data.posts; 
+    return data.posts;
 };
+
+export const RandomId = (length = 8) => {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+    let result='';
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+}
