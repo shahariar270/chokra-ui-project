@@ -9,6 +9,15 @@ export const addData = (id, value) => {
         }
     }
 }
+export const editData = (id, value) => {
+    return {
+        type: 'edit_data',
+        payload: {
+            id,
+            value
+        }
+    }
+}
 
 export const deleteData = (id) => {
     return {
@@ -28,6 +37,17 @@ export const CrudReducer = (state = initialState, action) => {
             return {
                 ...state,
                 crud: [...state.crud, action.payload]
+            };
+        case 'edit_data':
+            return {
+                ...state,
+                crud: state.crud.map(item =>
+                    item.id === action.payload.id ? {
+                        ...item,
+                        value: action.payload.value
+                    } :
+                        item
+                )
             };
         case 'remove_data':
             return {

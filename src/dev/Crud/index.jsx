@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './styles.css'
 import { RandomId } from '../../Utils/Helper';
-import { addData, deleteData } from '../../reduer/Crud';
+import { addData, deleteData, editData } from '../../reduer/Crud';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Crud = () => {
@@ -17,17 +17,25 @@ export const Crud = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        disPatch(addData(RandomId(), text));
+
+        if (editIndex !== null) {
+            disPatch(editData(editIndex, text))
+
+        } else {
+            disPatch(addData(RandomId(), text));
+        }
+
+        setText('')
     }
 
     const deleteHandle = (id) => {
-       disPatch(deleteData(id))
-    }   
+        disPatch(deleteData(id))
+    }
 
     const handelEdit = (id) => {
-        setEditIndex(id)
-        setText(items[id])
-        setEditMode(true)
+        setEditIndex(id);
+        setEditMode(true);
+
     }
 
     return (
