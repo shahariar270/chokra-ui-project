@@ -1,61 +1,28 @@
-
-
-export const addData = (id, value) => {
-    return {
-        type: 'add_data',
-        payload: {
-            id,
-            value
-        }
-    }
-}
-export const editData = (id, value) => {
-    return {
-        type: 'edit_data',
-        payload: {
-            id,
-            value
-        }
-    }
-}
-
-export const deleteData = (id) => {
-    return {
-        type: 'remove_data',
-        payload: id
-    }
-}
-
+import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     crud: []
 };
 
-export const CrudReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'add_data':
-            return {
-                ...state,
-                crud: [...state.crud, action.payload]
-            };
-        case 'edit_data':
-            return {
-                ...state,
-                crud: state.crud.map(item =>
-                    item.id === action.payload.id ? {
-                        ...item,
-                        value: action.payload.value
-                    } :
-                        item
-                )
-            };
-        case 'remove_data':
-            return {
-                ...state,
-                crud: state.crud.filter(item => item.id !== action.payload)
-            };
-        default:
-            return state;
-    }
-}
 
+const CrudSlice = createSlice({
+    name: 'crud',
+    initialState,
+    reducers: {
+        addData: (state, action) => {
+            state.crud = [...state.crud, action.payload]
+        },
+        deleteData: (state, action) => {
+            state.crud = state.crud.filter(item => item.id !== action.payload);
+        },
+        editData: (state, action) => {
+            const { id, value } = action.payload;
+            const item = state.crud.find((item) => item.id === id);
+            if (item) item.value = value;
+        }
+    }
+
+})
+
+export const { addData, editData, deleteData } = CrudSlice.actions;
+export default CrudSlice.reducer;

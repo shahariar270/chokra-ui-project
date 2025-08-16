@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { todoReducer } from "./TodoSlice/TodoSlice";
-import { CrudReducer } from "./Crud";
+import CrudReducer from './Crud/index'
 import logger from "redux-logger";
 
 
