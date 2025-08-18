@@ -10,7 +10,8 @@ import { DndKit } from './includes/dndKIt/Index';
 import { Emoji } from './includes/Imoji';
 import Pagination from './includes/Pagination/Pagination';
 import { FormikControl } from './includes/FormikControl';
-import { Crud } from './dev/Crud';
+import { Crud } from '@dev/Crud';
+import { Thunk } from '@dev/Thunk';
 
 
 function App() {
@@ -44,6 +45,9 @@ function App() {
             <Button as={RouterLink} to="/formik" colorScheme="teal" variant="ghost">
               Formik
             </Button>
+            <Button as={RouterLink} to="/thunk" colorScheme="teal" variant="ghost">
+              Thunk
+            </Button>
           </HStack>
         </Flex>
       </Box>
@@ -59,6 +63,7 @@ function App() {
         <Route path="/pagination" element={<Pagination />} />
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/formik" element={<FormikControl />} />
+        <Route path="/thunk" element={<Thunk />} />
       </Routes>
     </>
 
