@@ -1,6 +1,6 @@
 import { Routes, Route, Link as RouterLink } from 'react-router';
 import { TodoFrom } from "./includes/TodoFrom";
-import { Box, Flex, HStack, Button, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Button, Text, Image } from '@chakra-ui/react';
 import './App.css';
 import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
@@ -12,14 +12,18 @@ import Pagination from './includes/Pagination/Pagination';
 import { FormikControl } from './includes/FormikControl';
 import { Crud } from '@dev/Crud';
 import { Thunk } from '@dev/Thunk';
-
+import logo from '@dev/assets/images/logo.png'
 
 function App() {
   return (
     <>
       <Box px={6} py={3}>
         <Flex h={12} alignItems="center" justifyContent="space-between">
-          <Text color="grey.500" fontWeight="bold">My App</Text>
+         <Image
+          src={logo}
+          h="120px"
+          w="150px"
+         ></Image>
           <HStack spacing={6}>
             <Button as={RouterLink} to="/" colorScheme="teal" variant="ghost">
               Todo
