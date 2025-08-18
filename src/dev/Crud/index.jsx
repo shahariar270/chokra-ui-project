@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './styles.css'
 import { RandomId } from '../../Utils/Helper';
-import { addData, deleteData, editData } from '../../reduer/Crud';
 import { useDispatch, useSelector } from 'react-redux';
+import { addData, deleteData, editData } from '../../reduer/Crud';
 
 export const Crud = () => {
     const [text, setText] = useState('');
@@ -15,23 +15,23 @@ export const Crud = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if(text === ''){
+        if (text === '') {
             alert('plz enter todo   ')
             return;
         }
 
         if (editIndex !== null) {
-            disPatch(editData(editIndex, text))
+            disPatch(editData({ id: editIndex, value: text }))
             setEditIndex(null);
             setEditMode(false)
         } else {
-            disPatch(addData(RandomId(), text));
+            disPatch(addData({ id: RandomId(), value: text }));
         }
         setText('')
     }
 
     const deleteHandle = (id) => {
-        disPatch(deleteData(id))
+        disPatch(deleteData(id));
     }
 
     const handelEdit = (id) => {

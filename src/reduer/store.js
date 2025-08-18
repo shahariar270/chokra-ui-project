@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { todoReducer } from "./TodoSlice/TodoSlice";
-import { CrudReducer } from "./Crud";
+import CrudReducer from './Crud/index'
+import logger from "redux-logger";
 
 
 export default configureStore({
-  reducer:{
+  reducer: {
     todo: todoReducer,
     crud: CrudReducer
-  }
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
