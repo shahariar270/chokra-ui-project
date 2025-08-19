@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { use, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUsers } from '../../reduer/thunk/index'
+import { addUser, fetchUsers } from '../../reduer/thunk/index'
 
 export const Thunk = () => {
-    const dispatch = useDispatch();
-    const users = useSelector(state => state.users)
+  const dispatch = useDispatch();
+  const users = useSelector(state => state.users)
+  console.log(users);
 
+  useEffect(() => {
+    dispatch(fetchUsers());
 
-    useEffect(()=>{
-        dispatch(fetchUsers());
+  }, [dispatch])
 
-    },[dispatch])
+  const handleAddUser = () => {
+    dispatch(addUser({ name: "shahariar" }));
+  };
   return (
-    <div></div>
+    <div>
+      <button onClick={handleAddUser}>
+        Add User
+      </button>
+    </div>
   )
 }
