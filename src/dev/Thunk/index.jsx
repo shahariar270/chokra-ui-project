@@ -13,10 +13,6 @@ export const Thunk = () => {
 
   }, [dispatch])
 
-  const handleAddUser = () => {
-    dispatch(addUser({ name: "shahariar" }));
-  };
-
   return (
     <React.Fragment>
       <Formik
