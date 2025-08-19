@@ -9,7 +9,8 @@
         "strictFunctionTypes": true,
         "baseUrl": "./src",
         "paths": {
-        "@dev/*": ["dev/*"]
+        "@dev/*": ["dev/*"],
+        "@reduer/*": ["reduer/*"]
         }
     },
     "exclude": [

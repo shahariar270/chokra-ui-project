@@ -1,6 +1,6 @@
 import React, { use, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addUser, fetchUsers } from '../../reduer/thunk/index'
+import { addUser, fetchUsers } from '@reduer/thunk/index'
 
 export const Thunk = () => {
   const dispatch = useDispatch();

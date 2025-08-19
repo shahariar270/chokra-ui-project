@@ -11,6 +11,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@dev': path.resolve(__dirname, 'src/dev'),
+      '@reduer': path.resolve(__dirname, 'src/reduer'),
     },
   },
 })
