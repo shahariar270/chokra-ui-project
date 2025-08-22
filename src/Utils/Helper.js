@@ -13,9 +13,19 @@ export const blogData = async () => {
 
 export const RandomId = (length = 8) => {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-    let result='';
+    let result = '';
     for (let i = 0; i < length; i++) {
         result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return result;
+}
+
+export const makeRequest = async (url, fromData, method) => {
+    const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fromData),
+    })
+    const data = await res.json()
+    return data;
 }

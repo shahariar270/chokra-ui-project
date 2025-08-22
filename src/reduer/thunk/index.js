@@ -1,17 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { VscGlobe } from "react-icons/vsc"
+import { makeRequest } from "../../Utils/Helper"
 
 const initialState = {
     users: []
 }
+const url = 'https://jsonplaceholder.typicode.com/users'
 
 export const fetchUsers = createAsyncThunk(
     'users/fetchUsers',
     async (_, thunkApi) => {
         try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/users')
-            return await response.json()
-
+            const response = await makeRequest(url, _, 'GET');
+            return response;
         } catch (error) {
             return thunkApi.rejectWithValue(error)
 
@@ -23,16 +24,10 @@ export const addUser = createAsyncThunk(
     "users/addUser",
     async (fromData, thunkApi) => {
         try {
-            const res = await fetch('https://jsonplaceholder.typicode.com/users', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(fromData),
-
-            })
-            const data = await res.json();
-            return data
+            const data = await makeRequest(url, fromData, 'POST');
+            return data;
         } catch (error) {
-            console.log(error);
+            return thunkApi.rejectWithValue(error)
         }
     }
 )

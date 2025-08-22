@@ -6,8 +6,7 @@ import { Formik } from 'formik';
 export const Thunk = () => {
   const dispatch = useDispatch();
   const users = useSelector(state => state.users)
-  console.log(users);
-
+  
   useEffect(() => {
     dispatch(fetchUsers());
 
