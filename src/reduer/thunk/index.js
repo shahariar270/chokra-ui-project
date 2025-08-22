@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { VscGlobe } from "react-icons/vsc"
-import { makeRequest } from "../../Utils/Helper"
+import { makeRequest, makeRequest2 } from "../../Utils/Helper"
 
 const initialState = {
     users: []
@@ -11,8 +11,8 @@ export const fetchUsers = createAsyncThunk(
     'users/fetchUsers',
     async (_, thunkApi) => {
         try {
-            const response = await makeRequest(url, _, 'GET');
-            return response;
+            const data =await makeRequest2(url);
+            return data.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error)
 

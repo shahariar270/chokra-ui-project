@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const minifyText = (text, maxLength = 100) => {
     if (text.length <= maxLength) {
         return text;
@@ -28,4 +30,9 @@ export const makeRequest = async (url, fromData, method) => {
     })
     const data = await res.json()
     return data;
+}
+
+export const makeRequest2 = async (url) => {
+    const res = await axios.get(url);
+    return res;
 }
