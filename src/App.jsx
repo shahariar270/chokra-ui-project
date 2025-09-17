@@ -1,6 +1,6 @@
 import { Routes, Route, Link as RouterLink } from 'react-router';
 import { TodoFrom } from "./includes/TodoFrom";
-import { Box, Flex, HStack, Button, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Button, Text, Image } from '@chakra-ui/react';
 import './App.css';
 import { DynamicRoute } from "./includes/DynamicRoute/indev";
 import { Details } from './includes/DynamicRoute/Details';
@@ -10,15 +10,20 @@ import { DndKit } from './includes/dndKIt/Index';
 import { Emoji } from './includes/Imoji';
 import Pagination from './includes/Pagination/Pagination';
 import { FormikControl } from './includes/FormikControl';
-import { Crud } from './dev/Crud';
-
+import { Crud } from '@dev/Crud';
+import { Thunk } from '@dev/Thunk';
+import logo from '@dev/assets/images/logo.png'
 
 function App() {
   return (
     <>
       <Box px={6} py={3}>
         <Flex h={12} alignItems="center" justifyContent="space-between">
-          <Text color="grey.500" fontWeight="bold">My App</Text>
+         <Image
+          src={logo}
+          h="120px"
+          w="150px"
+         ></Image>
           <HStack spacing={6}>
             <Button as={RouterLink} to="/" colorScheme="teal" variant="ghost">
               Todo
@@ -44,6 +49,9 @@ function App() {
             <Button as={RouterLink} to="/formik" colorScheme="teal" variant="ghost">
               Formik
             </Button>
+            <Button as={RouterLink} to="/thunk" colorScheme="teal" variant="ghost">
+              Thunk
+            </Button>
           </HStack>
         </Flex>
       </Box>
@@ -59,6 +67,7 @@ function App() {
         <Route path="/pagination" element={<Pagination />} />
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/formik" element={<FormikControl />} />
+        <Route path="/thunk" element={<Thunk />} />
       </Routes>
     </>
 
