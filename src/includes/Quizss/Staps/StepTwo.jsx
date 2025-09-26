@@ -13,20 +13,25 @@ export const StepTwo = () => {
       <Field
         name="question.questionTitle"
         placeholder="Enter question title"
-        as="input" // Explicitly input field
+        as="input"
       />
 
       {values.question.option?.map((item, index) => (
         <div key={index}>
           <Field
+            type="radio"
+            name="question.answer"
+            value={item}
+            as="input"
+            style={{ marginRight: '10px' }}
+          />
+          <Field
             name={`question.option.${index}`}
             placeholder={`Item ${index + 1}`}
             as="input"
           />
-          {/* Optional: Remove button যোগ করুন যদি চান */}
-          {/* <button type="button" onClick={() => removeOption(index)}>Remove</button> */}
         </div>
-      )) || <p>No options yet. Add one!</p> /* যদি option undefined হয় */}
+      )) || <p>No options yet. Add one!</p>}
       <button
         type="button"
         onClick={addOption}
