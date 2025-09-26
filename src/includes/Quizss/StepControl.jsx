@@ -17,27 +17,30 @@ export const StepControl = () => {
       setStep(step + 1)
     }
   }
-  const getInitialValues = () => {
-    return {
+  const getInitialValues = {
+    id: '',
+    name: '',
+    author: '',
+    question: {  // এখানে object বানালাম (array না)
       id: '',
-      name: '',
-      question: [
-        {
-          id: '',
-          questionTitle: '',
-          answer: '',
-          type: '',
-        }
-      ]
+      questionTitle: '',
+      option: [''],  // একটি খালি অপশন দিয়ে শুরু
+      answer: '',
+      type: '',
     }
-  }
+  };
+
 
   return (
     <div className="form-container">
-      <h1 className="form-title">Step {step}</h1>
+      <h1 className="form-title">
+        <span className={step === 1 ? "active" : ""}>1</span>
+        <span className={step === 2 ? "active" : ""}>2</span>
+        <span className={step === 3 ? "active" : ""}>3</span>
+      </h1>
 
       <Formik
-        initialValues={getInitialValues()}
+        initialValues={getInitialValues}
         onSubmit={(values) => {
           console.log("✅ Final Submit:", values);
         }}

@@ -1,11 +1,17 @@
 import React, { useContext } from 'react'
 import { QuizContext } from '../Context'
+import { Field } from 'formik';
 
 export const StepOne = () => {
   let quiz = useContext(QuizContext);
 
-  console.log(quiz);
   return (
-    <div>StepOne</div>
+    <>
+      <Field
+        name='name'
+        type={'text'}
+        placeholder={'added you Question title'}
+      />
+    </>
   )
 }
