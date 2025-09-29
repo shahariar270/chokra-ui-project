@@ -1,25 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { StepControl } from './StepControl';
 import './styles.css'
 import { QuizContext } from './Context';
 
 export const Quiz = () => {
   const [openModal, setOpenModal] = useState(false);
-
-let  quizData = [
-    {
-      title: "what is javascript",
-      answer: ['PL', 'markup', 'all'],
-      carectAnswer: 'PL'
+  const [quizData, setQuizData] = useState({
+    id: '',
+    name: '',
+    author: '',
+    question: {
+      id: '',
+      questionTitle: '',
+      option: [''],
+      answer: '',
+      type: '',
     }
-  ]
+  })
+
 
   return (
     <React.Fragment>
       <button
         onClick={() => setOpenModal(true)}
       >add new</button>
-      <QuizContext.Provider value={quizData}>
+      <QuizContext.Provider value={{ quizData, setQuizData }}>
         {openModal && <StepControl />
 
         }
@@ -27,3 +32,5 @@ let  quizData = [
     </React.Fragment>
   )
 }
+
+export const useQuizContext = () => useContext(QuizContext);

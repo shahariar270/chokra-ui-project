@@ -3,6 +3,7 @@ import { StepOne } from './Staps/StepOne';
 import { StepThree } from './Staps/StepThree';
 import { StepTwo } from './Staps/StepTwo';
 import { Form, Formik } from 'formik';
+import { useQuizContext } from '.';
 
 export const StepControl = () => {
   const [step, setStep] = useState(1);
@@ -17,19 +18,8 @@ export const StepControl = () => {
       setStep(step + 1)
     }
   }
-  const getInitialValues = {
-    id: '',
-    name: '',
-    author: '',
-    question: {  // এখানে object বানালাম (array না)
-      id: '',
-      questionTitle: '',
-      option: [''],  // একটি খালি অপশন দিয়ে শুরু
-      answer: '',
-      type: '',
-    }
-  };
 
+  const { setQuizData, quizData } = useQuizContext();
 
   return (
     <div className="form-container">
@@ -40,9 +30,9 @@ export const StepControl = () => {
       </h1>
 
       <Formik
-        initialValues={getInitialValues}
+        initialValues={quizData}
         onSubmit={(values) => {
-          console.log("✅ Final Submit:", values);
+          setQuizData(values)
         }}
       >
         {({ handleSubmit }) => (
