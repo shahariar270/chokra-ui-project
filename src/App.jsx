@@ -13,17 +13,19 @@ import { FormikControl } from './includes/FormikControl';
 import { Crud } from '@dev/Crud';
 import { Thunk } from '@dev/Thunk';
 import logo from '@dev/assets/images/logo.png'
+import { Quiz } from './includes/Quizss';
+import { Register } from './includes/Resgister';
 
 function App() {
   return (
     <>
       <Box px={6} py={3}>
         <Flex h={12} alignItems="center" justifyContent="space-between">
-         <Image
-          src={logo}
-          h="120px"
-          w="150px"
-         ></Image>
+          <Image
+            src={logo}
+            h="120px"
+            w="150px"
+          ></Image>
           <HStack spacing={6}>
             <Button as={RouterLink} to="/" colorScheme="teal" variant="ghost">
               Todo
@@ -42,7 +44,7 @@ function App() {
             </Button>
             <Button as={RouterLink} to="/dnd_kit" colorScheme="teal" variant="ghost">
               DND kit
-              </Button>
+            </Button>
             <Button as={RouterLink} to="/pagination" colorScheme="teal" variant="ghost">
               Pagination
             </Button>
@@ -51,6 +53,12 @@ function App() {
             </Button>
             <Button as={RouterLink} to="/thunk" colorScheme="teal" variant="ghost">
               Thunk
+            </Button>
+            <Button as={RouterLink} to="/quiz" colorScheme="teal" variant="ghost">
+              Quiz
+            </Button>
+            <Button as={RouterLink} to="/auth" colorScheme="teal" variant="ghost">
+              Auth
             </Button>
           </HStack>
         </Flex>
@@ -68,6 +76,8 @@ function App() {
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/formik" element={<FormikControl />} />
         <Route path="/thunk" element={<Thunk />} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/auth" element={<Register />} />
       </Routes>
     </>
 
