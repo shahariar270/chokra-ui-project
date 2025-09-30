@@ -14,6 +14,7 @@ import { Crud } from '@dev/Crud';
 import { Thunk } from '@dev/Thunk';
 import logo from '@dev/assets/images/logo.png'
 import { Quiz } from './includes/Quizss';
+import { Register } from './includes/Resgister';
 
 function App() {
   return (
@@ -56,6 +57,9 @@ function App() {
             <Button as={RouterLink} to="/quiz" colorScheme="teal" variant="ghost">
               Quiz
             </Button>
+            <Button as={RouterLink} to="/auth" colorScheme="teal" variant="ghost">
+              Auth
+            </Button>
           </HStack>
         </Flex>
       </Box>
@@ -72,7 +76,8 @@ function App() {
         <Route path="/profile_card" element={<CallCard />} />
         <Route path="/formik" element={<FormikControl />} />
         <Route path="/thunk" element={<Thunk />} />
-        <Route path="/quiz" element={<Quiz/>} />
+        <Route path="/quiz" element={<Quiz />} />
+        <Route path="/auth" element={<Register />} />
       </Routes>
     </>
 

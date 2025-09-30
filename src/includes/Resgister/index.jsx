@@ -1,3 +1,4 @@
+import { auth } from '@dev/auth';
 import { login, logout, register } from '@dev/auth/helper';
 import { clearUser, setUser } from '@reduer/user/userSilice';
 import React, { useEffect, useState } from 'react'
@@ -6,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const user = useSelector((state) => state.user.user);
+    const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
